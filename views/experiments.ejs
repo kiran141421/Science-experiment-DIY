@@ -1,0 +1,30 @@
+<%- include("partials/header") %>
+
+<h1> <%= experiment.name %>   </h1>
+<image src="<%= experiment.image%>" alt="Loading"></image>
+<br>
+<h3>Description</h3>
+<p> <%= experiment.description %></p>
+
+<h3>Difficulty Level</h3>
+<p><%=experiment.level%></p>
+
+<h3>Subject</h3>
+<p><%=experiment.subject %></p>
+
+<h3>Materials Required</h3>
+<p><%=experiment.materials %></p>
+
+<h3>Safety Precautions</h3>
+<p><%=experiment.safety %></p>
+
+<h3>Instructions</h3>
+
+
+<% experiment.instructions.forEach(function(instruction){ %>
+    <h4>Step <%= instruction.step %>: </h4>
+    <img src="<%= instruction.image %>" alt="failed to load">
+    <p><%= instruction.about %></p>
+<% }) %>
+
+<%- include("partials/footer") %>

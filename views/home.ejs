@@ -1,0 +1,35 @@
+<%- include("partials/header") %>
+
+<div class="row row-cols-1 row-cols-md-3 mb-3">
+
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm" style="width: 18rem;">
+            <h1><a class="nav-item nav-link" href="/experiments/<%=homeStartingContent.name%>">Baking Soda volcanoes</a></h1>
+            <img class="card-img-top" src="<%=homeStartingContent.image%>" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text"><%= homeStartingContent.description.substring(0,100) %></p>
+            </div>
+        </div>
+    </div>
+
+    <% if(experiments.length > 1){ %>
+        <% experiments.forEach(function(experiment){ %>
+            <% if(experiment.name != "Volcano Eruption"){ %>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm" style="width: 18rem;">
+                    <h1><a class="nav-item nav-link" href="/experiments/<%=experiment.name%>"><%= experiment.name %> </a></h1> </h1>
+                    <img class="card-img-top" src="<%=experiment.image%>" alt="cannot load">
+                    <div class="card-body">
+                        <p class="card-text"><%= experiment.description.substring(0,100)+" ..." %></p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        
+        <% }); %>
+    <% } %>
+
+</div>
+
+
+<%- include("partials/footer") %>

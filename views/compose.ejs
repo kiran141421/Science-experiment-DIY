@@ -1,0 +1,116 @@
+<%- include("partials/header") %>
+
+<script type='text/javascript'>
+    var i=1;
+    const instructions=[];
+    function addFields(){
+        
+        console.log("it's a goddamn");
+        let instruction={
+            step:Number,
+            image:String,
+            about:String,
+        }
+
+        instruction.step=i;
+        instruction.image=document.getElementsByName("img"+i)[0].value;
+        instruction.about=document.getElementsByName("desc"+i)[0].value;
+
+        instructions.push(instruction);
+        i++;
+        var container = document.getElementById("container");
+            
+            const h4 = document.createElement("h4");
+            const textNode = document.createTextNode("Step "+i+":");
+            h4.appendChild(textNode);
+            container.appendChild(h4);
+
+            var image = document.createElement("h5");
+            var imageText= document.createTextNode("Image");
+            image.appendChild(imageText);
+            container.appendChild(image);
+
+            var img = document.createElement("input");
+            img.type = "text";
+            img.name = "img" + i;
+            img.className="form-control";
+            img.placeholder="paste the image url";
+            container.appendChild(img);
+
+            var desc = document.createElement("h5");
+            var descText= document.createTextNode("Description");
+            desc.appendChild(descText);
+            container.appendChild(desc);
+
+            var desc = document.createElement("input");
+            desc.type = "text";
+            desc.name = "desc" + i;
+            desc.className="form-control";
+            container.appendChild(desc);
+             
+            container.appendChild(document.createElement("br"));
+        }
+
+        function sendArray(){
+            console.log("its working");
+
+            let instruction={
+            step:Number,
+            image:String,
+            about:String,
+            }
+
+            instruction.step=i;
+            instruction.image=document.getElementsByName("img"+i)[0].value;
+            instruction.about=document.getElementsByName("desc"+i)[0].value;
+
+            instructions.push(instruction);
+
+            document.getElementsByName("instructions")[0].value = JSON.stringify(instructions);
+
+        }
+</script>
+
+<form action="/compose" method="POST">
+    <div class="mb-3" >
+        <label><h4>Experiment Name</h4></label>
+        <input class="form-control" type="text" name="name" >
+
+        <label><h4>Description</h4></label>
+        <input class="form-control" type="text" name="description" placeholder="Not more than one line">
+
+        <label><h4>Difficulty Level:</h4>(on a scale of 1 to 5)</label>
+        <input type="range" name="level" min="0" max="5" step="1">
+
+        <br>
+        <label><h4>Subject</h4></label>
+        <input class="form-control" type="text" name="subject" placeholder="Physics/Chemistry/Biology/General Science">
+
+        <label><h4>Image</h4></label>
+        <input class="form-control" type="text" name="image" placeholder="paste the image url">
+
+        <label><h4>Materials Required</h4></label>
+        <textarea class="form-control" rows="2" name="materials"></textarea>
+
+        <label><h4>Saftey Precautions</h4></label>
+        <textarea class="form-control" rows="2" name="safety"></textarea>
+
+
+        <label><h4>Instructions</h4></label>
+        <br>
+        <label><h4>Step 1</h4></label>
+        <br>
+        <label><h5>Image</h5></label>
+        <input class="form-control" type="text" name="img1" placeholder="paste the image url" >
+        <label><h5>Description</h5></label>
+        <input class="form-control" type="text" name="desc1">
+        <div id="container" >
+        </div>
+        <input type="button" class="btn btn-primary" style="margin-top:10px;" onclick="addFields()" value="Add another step">
+    </div>
+    <button class="btn btn-primary" type="submit" name="button" ><a onclick="sendArray()">Publish</a></button>
+    <input name="instructions" type="input" value="">
+</form>
+
+
+<%- include("partials/footer") %>
